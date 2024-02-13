@@ -1,3 +1,4 @@
+import 'package:favorite_places/widgets/Image_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,6 +51,11 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            // Input Image
+            ImageInput(),
             const SizedBox(
               height: 16,
             ),
