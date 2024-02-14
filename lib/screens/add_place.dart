@@ -55,7 +55,7 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
               height: 10,
             ),
             // Input Image
-            ImageInput(),
+            const ImageInput(),
             const SizedBox(
               height: 16,
             ),
