@@ -32,6 +32,7 @@ class _LocationInputState extends State<LocationInput> {
 
   void _getCurrentLocation() async {
     Location location = Location();
+
     bool serviceEnabled;
     PermissionStatus permissionGranted;
     LocationData locationData;
@@ -57,7 +58,6 @@ class _LocationInputState extends State<LocationInput> {
     });
 
     locationData = await location.getLocation();
-
     final lat = locationData.latitude;
     final lng = locationData.longitude;
 
@@ -67,15 +67,17 @@ class _LocationInputState extends State<LocationInput> {
 
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=AIzaSyC_qBAhT5XAzk2667NZR29A73I8nMUIOfs');
-
     final response = await http.get(url);
     final resData = json.decode(response.body);
     final address = resData['results'][0]['formatted_address'];
 
     setState(() {
-      _pickedLocation =
-          PlaceLocation(latitude: lat, longitude: lng, address: address);
-      _isGettingLocation = true;
+      _pickedLocation = PlaceLocation(
+        latitude: lat,
+        longitude: lng,
+        address: address,
+      );
+      _isGettingLocation = false;
     });
 
     widget.onSelectLocation(_pickedLocation!);
@@ -122,17 +124,17 @@ class _LocationInputState extends State<LocationInput> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton.icon(
-              onPressed: _getCurrentLocation,
               icon: const Icon(Icons.location_on),
               label: const Text('Get Current Location'),
+              onPressed: _getCurrentLocation,
             ),
             TextButton.icon(
-              onPressed: () {},
               icon: const Icon(Icons.map),
               label: const Text('Select on Map'),
-            )
+              onPressed: () {},
+            ),
           ],
-        )
+        ),
       ],
     );
   }
